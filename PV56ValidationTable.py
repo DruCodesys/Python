@@ -30,6 +30,7 @@ for root, dirs, files in os.walk(USB):
                 header = SN != 'S/N'
                 data = data[header]
                 date = data['S/N'][0]
+                origin = data['pos'][0]
                 operator = data['Crack_Pressure_Cycle1'][0]
                 order = data['Crack_Pressure_Cycle2'][0]
                 delivery = data['Crack_Pressure_Cycle3'][0]
@@ -76,49 +77,66 @@ for root, dirs, files in os.walk(USB):
                 val["Cycle5"] = testData['R6'] >= testData['C6']
                 val["Cycle6"] = testData['R7'] >= testData['C7']
                 valFlow = pd.DataFrame()
-                valFlow = testData['Flow'] < 8;
-                valFlowPressure = testData['FP'] > 3;
+                valFlow = testData['Flow'] < 8
+                valFlowPressure = testData['FP'] > 3
                 errors = []
+                errorIndex = []
 
                 if valFlowPressure.any():
                     for i, element in enumerate(valFlowPressure):
                         if element:
                             errors.append("Fehler bei Ventil No.: "+ str(SN[i]) +" im Flow-Druck")
+                            errorIndex.append(['FP', i])
                 if valFlow.any():
                     for i, element in enumerate(valFlow):
                         if element:
                             errors.append("Fehler bei Ventil No.: " + str(SN[i]) + " im Flow")
-
+                            errorIndex.append(['Flow', i])
                 if val["Cycle0"].any():
                     for i, element in enumerate(val["Cycle0"]):
                         if element:
                             errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 1")
+                            errorIndex.append(['Cycle0', i])
                 if val["Cycle1"].any():
                     for i, element in enumerate(val["Cycle1"]):
                         if element:
                             errors.append("Fehler bei Ventil No.: " + str(SN[i]) + " in Zyklus 2")
+                            errorIndex.append(['Cycle1', i])
                 if val["Cycle2"].any():
                     for i, element in enumerate(val["Cycle2"]):
                         if element:
                             errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 3")
+                            errorIndex.append(['Cycle2', i])
                 if val["Cycle3"].any():
                     for i, element in enumerate(val["Cycle3"]):
                         if element:
                             errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 4")
+                            errorIndex.append(['Cycle3', i])
                 if val["Cycle4"].any():
                     for i, element in enumerate(val["Cycle4"]):
                         if element:
                             errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 5")
+                            errorIndex.append(['Cycle4', i])
                 if val["Cycle5"].any():
                     for i, element in enumerate(val["Cycle5"]):
                         if element:
                             errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 6")
+                            errorIndex.append(['Cycle5', i])
                 if val["Cycle6"].any():
                     for i, element in enumerate(val["Cycle6"]):
                         if element:
                             errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 7")
-
-                FILE = "result.md"
+                            errorIndex.append(['Cycle6', i])
+                print(errorIndex)
+                FILE = "Ergebnis5.md"
+                
+                with open (FILE, 'a')as file:
+                    file.write('\n______\n')
+                    file.write(f" ## Messergebnise aus {origin}\n\n")
+                    file.write('\n')
+                    file.write(f'Aus Datei: {origin} Prüfer: {operator} Datum: {date} Auftrag: {order} Lieferschein: {delivery} Lieferscheinposition: {delPos}' )
+                    file.write('\n\n')
+                    file.close()
                 testData.to_markdown(FILE, mode = 'a')
                 with open(FILE, 'a' ) as file:
                     file.write("\n")
