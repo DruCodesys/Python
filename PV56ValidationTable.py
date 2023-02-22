@@ -11,12 +11,16 @@ import pandas as pd
 
 #------PROGRAMMPARAMETER-----#
 #TODO: Die Variable 'USB' muss das Hauptverzeichnis des USB-Sticks sein.
-USB = "C:/USers/pink_/Documents/GitHub/Python/"
 #USB = "C:/Users/lschi/Documents/GitHub/Python/"
+USB = "D:/"
+#USB = "C:/Users/lschi/Desktop/Files"
 
 #TODO: Bemessungsgrenze für Durchflusswert und Druck
 DRUCK = 3
 FLOW = 8
+CRACKMAX = 2.2
+CRACKMIN = 1.8
+RESEATMIN = 1.6
 
 #TODO: Name der Ergebnisdatei im .md-Format
 #TODO: Bitte Beachten: DIe Ergebnisdatei manuell löschen! Dieses Script hängt immer nur an die aktuelle Datei an.
@@ -28,7 +32,7 @@ for root, dirs, files in os.walk(USB):
         for FILE in files:
             if FILE.endswith(".csv"):
                 # FILE ist tabulator getrennte csv-Datei
-                data = pd.read_csv(FILE, delimiter="\t", error_bad_lines= False)
+                data = pd.read_csv(FILE, delimiter="\t", on_bad_lines= 'warn')
 
                 #Header sind Zeilen 0, 8, 17 --> Unregelmäßig
                 #Metadaten sind in den Zeilen 1, 9, 18 --> Unregelmäßig
@@ -91,13 +95,43 @@ for root, dirs, files in os.walk(USB):
 
                 #Berechne die Felder in denen Der Reseat-Pressure größer oder gleich dem Crack-Pressure ist
                 val = pd.DataFrame()
-                val["Cycle0"] = testData['R1'] >= testData['C1']
-                val["Cycle1"] = testData['R2'] >= testData['C2']
-                val["Cycle2"] = testData['R3'] >= testData['C3']
-                val["Cycle3"] = testData['R4'] >= testData['C4']
-                val["Cycle4"] = testData['R5'] >= testData['C5']
-                val["Cycle5"] = testData['R6'] >= testData['C6']
-                val["Cycle6"] = testData['R7'] >= testData['C7']
+                val["Cycle0"] = (testData['R1'] >= testData['C1'])
+                val["Cycle1"] = (testData['R2'] >= testData['C2'])
+                val["Cycle2"] = (testData['R3'] >= testData['C3'])
+                val["Cycle3"] = (testData['R4'] >= testData['C4'])
+                val["Cycle4"] = (testData['R5'] >= testData['C5'])
+                val["Cycle5"] = (testData['R6'] >= testData['C6'])
+                val["Cycle6"] = (testData['R7'] >= testData['C7'])
+
+                #Berechne die Felder in denen max. der Crack/Pressure [berschritten wurde
+                valCMax = pd.DataFrame()
+                valCMax["Cycle0"] = testData['C1'] > CRACKMAX
+                valCMax["Cycle1"] = testData['C2'] > CRACKMAX
+                valCMax["Cycle2"] = testData['C3'] > CRACKMAX
+                valCMax["Cycle3"] = testData['C4'] > CRACKMAX
+                valCMax["Cycle4"] = testData['C5'] > CRACKMAX
+                valCMax["Cycle5"] = testData['C6'] > CRACKMAX
+                valCMax["Cycle6"] = testData['C7'] > CRACKMAX
+
+                #Berechne die Felder in denen der Crack/Pressure zu klein ist.
+                valCMin = pd.DataFrame()
+                valCMin["Cycle0"] = testData['C1'] < CRACKMIN
+                valCMin["Cycle1"] = testData['C2'] < CRACKMIN
+                valCMin["Cycle2"] = testData['C3'] < CRACKMIN
+                valCMin["Cycle3"] = testData['C4'] < CRACKMIN
+                valCMin["Cycle4"] = testData['C5'] < CRACKMIN
+                valCMin["Cycle5"] = testData['C6'] < CRACKMIN
+                valCMin["Cycle6"] = testData['C7'] < CRACKMIN
+
+                #BErechne die Felder in denenn der nReseat-Pressure zu klein ist
+                valRmin = pd.DataFrame()
+                valRmin["Cycle0"] = testData['R1'] < RESEATMIN
+                valRmin["Cycle1"] = testData['R2'] < RESEATMIN
+                valRmin["Cycle2"] = testData['R3'] < RESEATMIN
+                valRmin["Cycle3"] = testData['R4'] < RESEATMIN
+                valRmin["Cycle4"] = testData['R5'] < RESEATMIN
+                valRmin["Cycle5"] = testData['R6'] < RESEATMIN
+                valRmin["Cycle6"] = testData['R7'] < RESEATMIN
 
                 #Berechne die Felder in denen der Flow kleiner FLOW und Druck größer DRUCK ist.
                 valFlow = pd.DataFrame()
@@ -124,10 +158,25 @@ for root, dirs, files in os.walk(USB):
                             if element:
                                 errors.append("Fehler bei Ventil No.: "+str(SN[i]) +"in Zyklus" + str(cycles.index(cycle)+1))
                                 errorIndex.append([cycle, i])
+                    if valCMax[cycle].any():
+                        for i, element in enumerate(valCMax[cycle]):
+                            if element:
+                                errors.append("Fehler bei Ventil No.: "+str(SN[i]) +"in Zyklus" + str(cycles.index(cycle)+1)+ "Crack-Pressure zu hoch!")
+                                errorIndex.append([cycle, i])
+                    if valCMin[cycle].any():
+                        for i, element in enumerate(valCMin[cycle]):
+                            if element:
+                                errors.append("Fehler bei Ventil No.: "+str(SN[i]) +"in Zyklus" + str(cycles.index(cycle)+1)+ "Crack-Pressure zu niedrig!")
+                                errorIndex.append([cycle, i])
+                    if valRmin[cycle].any():
+                        for i, element in enumerate(valRmin[cycle]):
+                            if element:
+                                errors.append("Fehler bei Ventil No.: "+str(SN[i]) +"in Zyklus" + str(cycles.index(cycle)+1)+ "Reseat-Pressure zu niedrig!")
+                                errorIndex.append([cycle, i])
 
                 print(errorIndex)
                 FILE = ERGEBNIS
-                
+
                 with open (FILE, 'a')as file:
                     file.write('\n______\n')
                     file.write(f" ## Messergebnise aus {origin}\n\n")
