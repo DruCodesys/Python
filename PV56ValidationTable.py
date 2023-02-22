@@ -107,6 +107,7 @@ for root, dirs, files in os.walk(USB):
                 #Initialisiere Fehler-Array und schreibe die Fehler und Fehlerindizes in die Arrays
                 errors = []
                 errorIndex = []
+                cycles = ["Cycle0", "Cycle1", "Cycle2", "Cycle3", "Cycle4", "Cycle5", "Cycle6"]
                 if valFlowPressure.any():
                     for i, element in enumerate(valFlowPressure):
                         if element:
@@ -117,42 +118,14 @@ for root, dirs, files in os.walk(USB):
                         if element:
                             errors.append("Fehler bei Ventil No.: " + str(SN[i]) + " im Flow")
                             errorIndex.append(['Flow', i])
-                if val["Cycle0"].any():
-                    for i, element in enumerate(val["Cycle0"]):
-                        if element:
-                            errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 1")
-                            errorIndex.append(['Cycle0', i])
-                if val["Cycle1"].any():
-                    for i, element in enumerate(val["Cycle1"]):
-                        if element:
-                            errors.append("Fehler bei Ventil No.: " + str(SN[i]) + " in Zyklus 2")
-                            errorIndex.append(['Cycle1', i])
-                if val["Cycle2"].any():
-                    for i, element in enumerate(val["Cycle2"]):
-                        if element:
-                            errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 3")
-                            errorIndex.append(['Cycle2', i])
-                if val["Cycle3"].any():
-                    for i, element in enumerate(val["Cycle3"]):
-                        if element:
-                            errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 4")
-                            errorIndex.append(['Cycle3', i])
-                if val["Cycle4"].any():
-                    for i, element in enumerate(val["Cycle4"]):
-                        if element:
-                            errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 5")
-                            errorIndex.append(['Cycle4', i])
-                if val["Cycle5"].any():
-                    for i, element in enumerate(val["Cycle5"]):
-                        if element:
-                            errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 6")
-                            errorIndex.append(['Cycle5', i])
-                if val["Cycle6"].any():
-                    for i, element in enumerate(val["Cycle6"]):
-                        if element:
-                            errors.append("Fehler bei Ventil No.: "+str(SN[i]) +" in Zyklus 7")
-                            errorIndex.append(['Cycle6', i])
-                #print(errorIndex)
+                for cycle in cycles:
+                    if val[cycle].any():
+                        for i, element in enumerate(val[cycle]):
+                            if element:
+                                errors.append("Fehler bei Ventil No.: "+str(SN[i]) +"in Zyklus" + str(cycles.index(cycle)+1))
+                                errorIndex.append([cycle, i])
+
+                print(errorIndex)
                 FILE = ERGEBNIS
                 
                 with open (FILE, 'a')as file:
