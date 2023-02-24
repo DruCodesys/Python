@@ -46,6 +46,7 @@ for root, dirs, files in os.walk(USB):
             valCrackMax = EvalService.evaluateCrackMax(testData, CRACKMAX)
             valCrackMin = EvalService.evaluateCrackMin(testData, CRACKMIN)
             valReseatMin = EvalService.evaluateReseatMin(testData, RESEATMIN)
-            errors = errorService.createErrors(val, valFlow, valFlowPressure, valCrackMax, valCrackMin, valReseatMin, SN)
+            errors, errorIndex = errorService.createErrors(val, valFlow, valFlowPressure, valCrackMax, valCrackMin, valReseatMin, SN)
             DataService.writeData(ERGEBNIS, metaData, errors, testData)
             TkService.showNotification(errors)
+            #TkService.showResultsInGrid(testData, errors, errorIndex)

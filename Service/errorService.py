@@ -37,4 +37,4 @@ def createErrors(val, valFlow, valFlowPressure, valCrackMax, valCrackMin, valRes
                     errors.append("Fehler bei Ventil No.: " + str(SN[i]) + " in Zyklus" + str(cycles.index(cycle) + 1)+": Reseat-Pressure > Crack-Pressure")
                     errorIndex.append([cycle, i])
 
-    return errors
+    return errors, errorIndex
