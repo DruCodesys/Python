@@ -18,8 +18,8 @@ def DataService(data):
     delivery = data['Crack_Pressure_Cycle3'][0]
     delPos = data['Crack_Pressure_Cycle4'][0]
 
-    metaData = pd.DataFrame()
-    metaData['date'], metaData['origin'], metaData['operator'], metaData['order'], metaData['delivery'], metaData['delPos'] = date, origin, operator, order, delivery, delPos
+    metaData = metaData = pd.DataFrame({'date': [date], 'origin': [origin], 'operator': [operator], 'order': [order], 'delivery': [delivery], 'delPos': [delPos]})
+
 
     # entferne die Zeilen mit Metadaten
     R1 = data['Reseat_Pressure_Cycle1']

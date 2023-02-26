@@ -48,5 +48,5 @@ for root, dirs, files in os.walk(USB):
             valReseatMin = EvalService.evaluateReseatMin(testData, RESEATMIN)
             errors, reds = errorService.createErrorsBySN(val, valFlow, valFlowPressure, valCrackMax, valCrackMin, valReseatMin, SN)
             DataService.writeData(ERGEBNIS, metaData, errors, testData)
-            TkService.showNotification(errors)
-            TkService.showResultsInGrid(testData, reds)
+            #TkService.showNotification(errors)
+            TkService.showResultsInGrid(testData, reds, metaData)
