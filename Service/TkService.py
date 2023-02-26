@@ -7,6 +7,10 @@ import tkinter.font as font
 import numpy as np
 import pandas as pd
 
+def rgbaToHex(rgba):
+    r, g, b = rgba
+    return "#{:02x}{:02x}{:02x}".format(r, g, b)
+
 
 def showNotification(errors):
     if len(errors) == 0:
@@ -78,7 +82,9 @@ def showResultsInGrid(testData, errors, metaData):
     root.canvas.config(scrollregion=root.canvas.bbox("all"))
 
     # Add close button
-    closeButton = Tk.Button(root, text="Schließen und Nächste Daten zeigen", command=root.destroy, width=60, height=10, bg="blue", fg = "black")
+    closeButton = Tk.Button(root, text="Schließen und Nächste Daten zeigen", command=root.destroy, width=0, height=0,
+                            bg=rgbaToHex((50, 50, 255)), fg=rgbaToHex((0, 0, 0)))
+
     # The width and height parameters control the width and height of the button in pixels.
     buttonFont = font.Font(family = "Helvetica", weight="bold")
     closeButton.pack(side="bottom", pady=10)
