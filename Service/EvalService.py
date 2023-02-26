@@ -3,7 +3,8 @@ import pandas as pd
 
 def evaluateCrackReseat(testData):
     # Berechne die Felder in denen Der Reseat-Pressure größer oder gleich dem Crack-Pressure ist
-    val = pd.DataFrame()
+    val = pd.DataFrame()#
+    val["SN"] = testData["SN"]
     val["Cycle0"] = testData['R1'] >= testData['C1']
     val["Cycle1"] = testData['R2'] >= testData['C2']
     val["Cycle2"] = testData['R3'] >= testData['C3']
@@ -16,18 +17,21 @@ def evaluateCrackReseat(testData):
 
 def evaluateFlow(testData, FLOW):
     valFlow = pd.DataFrame()
+    valFlow["SN"] = testData["SN"]
     valFlow = testData['Flow'] < FLOW
     return valFlow
 
 
 def evaluateFlowPressure(testData, DRUCK):
     valFlowPressure = pd.DataFrame()
+    valFlowPressure["SN"] = testData["SN"]
     valFlowPressure = testData['FP'] > DRUCK
     return valFlowPressure
 
 
 def evaluateCrackMax(testData, CRACKMAX):
     crackMax = pd.DataFrame()
+    crackMax["SN"] = testData["SN"]
     crackMax["Cycle0"] = testData['C1'] > CRACKMAX
     crackMax["Cycle1"] = testData['C2'] > CRACKMAX
     crackMax["Cycle2"] = testData['C3'] > CRACKMAX
@@ -40,18 +44,20 @@ def evaluateCrackMax(testData, CRACKMAX):
 
 def evaluateCrackMin(testData, CRACKMIN):
     crackMin = pd.DataFrame()
-    crackMin["Cycle0"] = testData['C1'] > CRACKMIN
-    crackMin["Cycle1"] = testData['C2'] > CRACKMIN
-    crackMin["Cycle2"] = testData['C3'] > CRACKMIN
-    crackMin["Cycle3"] = testData['C4'] > CRACKMIN
-    crackMin["Cycle4"] = testData['C5'] > CRACKMIN
-    crackMin["Cycle5"] = testData['C6'] > CRACKMIN
-    crackMin["Cycle6"] = testData['C7'] > CRACKMIN
+    crackMin["SN"] = testData["SN"]
+    crackMin["Cycle0"] = testData['C1'] < CRACKMIN
+    crackMin["Cycle1"] = testData['C2'] < CRACKMIN
+    crackMin["Cycle2"] = testData['C3'] < CRACKMIN
+    crackMin["Cycle3"] = testData['C4'] < CRACKMIN
+    crackMin["Cycle4"] = testData['C5'] < CRACKMIN
+    crackMin["Cycle5"] = testData['C6'] < CRACKMIN
+    crackMin["Cycle6"] = testData['C7'] < CRACKMIN
     return crackMin
 
 
 def evaluateReseatMin(testData, RESEATMIN):
     reseatMin = pd.DataFrame()
+    reseatMin["SN"] = testData["SN"]
     reseatMin["Cycle0"] = testData['R1'] < RESEATMIN
     reseatMin["Cycle1"] = testData['R2'] < RESEATMIN
     reseatMin["Cycle2"] = testData['R3'] < RESEATMIN
