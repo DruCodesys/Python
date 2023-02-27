@@ -49,11 +49,11 @@ def createErrors(val, valFlow, valFlowPressure, valCrackMax, valCrackMin, valRes
     return errors, errorIndex
 
 
-def setReds(value, errors, y, x):
-    errors[x][y] = value
+def setReds(value, reds, row, col):
+    reds[row][col] = value
     if value:
-        errors[y][0] = True
-    return errors
+        reds[row][0] = True
+    return reds
 def createErrorsBySN(val: pd.DataFrame, valFlow: pd.DataFrame, valFlowPressure: pd.DataFrame, valCrackMax: pd.DataFrame,
                      valCrackMin: pd.DataFrame, valReseatMin: pd.DataFrame, SN: pd.DataFrame):
     errors = []
@@ -62,30 +62,30 @@ def createErrorsBySN(val: pd.DataFrame, valFlow: pd.DataFrame, valFlowPressure: 
     for i, element in enumerate(SN):
         if valFlow[i]:
             errors.append("Fehler bei Ventil No.: " + str(element) + " im Flow-Druck")
-            reds = setReds(True, reds, 1, i)
+            reds = setReds(True, reds, i, 1)
         if valFlowPressure[i]:
             errors.append("Fehler bei Ventil No.: " + str(element) + " im Flow-Druck")
-            reds = setReds(True, reds, 2, i)
+            reds = setReds(True, reds, i, 2)
         for j, cycle in enumerate(cycles):
             if valCrackMax[cycle][i]:
                 errors.append(
                     "Fehler bei Ventil No.: " + str(element) + "Crack-Limit überschritten" + "in Zyklus" + str(
                         j + 1))
-                reds = setReds(True, reds, cycles.index(cycle)+3, i)
+                reds = setReds(True, reds, i, cycles.index(cycle)+3)
             if valCrackMin[cycle][i]:
                 errors.append(
                     "Fehler bei Ventil No.: " + str(element) + "Crack-Limit unterschritten" + "in Zyklus" + str(
                         j + 1))
-                reds = setReds(True, reds, cycles.index(cycle)+3, i)
+                reds = setReds(True, reds, i, cycles.index(cycle)+3)
             if valReseatMin[cycle][i]:
                 errors.append(
                     "Fehler bei Ventil No.: " + str(element) + "Reseat-Limit unterschritten" + "in Zyklus" + str(
                         j + 1))
-                reds = setReds(True, reds, cycles.index(cycle)+1 + valCrackMax.shape[1], i)
+                reds = setReds(True, reds, i, cycles.index(cycle)+1 + valCrackMax.shape[1])
             if val[cycle][i]:
                 errors.append("Fehler bei Ventil No.: " + str(element) + " in Zyklus" + str(
                     j + 1) + ": Reseat-Pressure > Crack-Pressure")
-                reds = setReds(True, reds, cycles.index(cycle) + valCrackMax.shape[1]+2, i)
-                reds = setReds(True, reds, cycles.index(cycle) + 3, i)
+                reds = setReds(True, reds, i, cycles.index(cycle) + valCrackMax.shape[1]+2)
+                reds = setReds(True, reds, i, cycles.index(cycle) + 3)
 
     return errors, reds
