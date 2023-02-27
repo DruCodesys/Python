@@ -12,7 +12,7 @@ import pandas as pd
 import os
 
 #Dateipfad des USB-Sticks angeben. Für Entwicklungszwecke zunächst vom Root-Verzeichnis aus.
-FILE = "223061_LS1230093_1.csv"
+FILE = "../223061_LS1230093_1.csv"
 
 # FILE ist tabulator getrennte csv-Datei
 data = pd.read_csv(FILE, delimiter="\t", error_bad_lines= False)
