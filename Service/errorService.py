@@ -64,7 +64,7 @@ def createErrorsBySN(val: pd.DataFrame, valFlow: pd.DataFrame, valFlowPressure: 
             errors.append("Fehler bei Ventil No.: " + str(element) + " im Flow-Druck")
             reds = setReds(True, reds, i, 1)
         if valFlowPressure[i]:
-            errors.append("Fehler bei Ventil No.: " + str(element) + " im Flow-Druck")
+            errors.append("Fehler bei Ventil No.: " + str(element) + " im Flow")
             reds = setReds(True, reds, i, 2)
         for j, cycle in enumerate(cycles):
             if valCrackMax[cycle][i]:
