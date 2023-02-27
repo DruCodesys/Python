@@ -18,7 +18,7 @@ def showNotification(errors):
                                "Es wurden Fehler in den Messungen gefunden. Öffne die Datei result.md um anzuzeigen")
 
 
-def showResultsInGrid(testData, errors, metaData):
+def showResultsInGrid(testData, errors, metaData, errorlist):
     root = tk.Tk()
     root.winfo_toplevel().title("Messdaten von Verzeichnis")
 
@@ -73,9 +73,11 @@ def showResultsInGrid(testData, errors, metaData):
         x = i * 100
         root.canvas.create_line(x, y1, x, y2, fill='grey')
 
-    # Configure canvas to scroll frame
-    root.frame.update_idletasks()
-    root.canvas.config(scrollregion=root.canvas.bbox("all"))
+
+    #Add errorlist
+    for element in errorlist:
+        root.label = tk.Label(root, text=element)
+        root.label.pack(side= 'top', fill='both', expand =1)
 
     # Add close button
     closeButton = tk.Button(root, text="Schließen und Nächste Daten zeigen", command=root.destroy, width=0, height=0,
@@ -85,6 +87,10 @@ def showResultsInGrid(testData, errors, metaData):
     buttonFont = font.Font(family="Helvetica", weight="bold")
     closeButton.pack(side="bottom", pady=10)
     closeButton['font'] = buttonFont
+
+    # Configure canvas to scroll frame
+    root.frame.update_idletasks()
+    root.canvas.config(scrollregion=root.canvas.bbox("all"))
 
     root.focus_force()
     root.mainloop()

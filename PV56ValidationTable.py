@@ -50,4 +50,4 @@ for root, dirs, files in os.walk(USB):
                                                          valReseatMin, SN)
             DataService.writeData(ERGEBNIS, metaData, errors, testData)
             # TkService.showNotification(errors)
-            TkService.showResultsInGrid(testData, reds, metaData)
+            TkService.showResultsInGrid(testData, reds, metaData, errors)
