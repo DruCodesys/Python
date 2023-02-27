@@ -13,10 +13,10 @@ from Service import EvalService, DataService, errorService, TkService
 
 # ------PROGRAMMPARAMETER-----#
 # TODO: Die Variable 'USB' muss das Hauptverzeichnis des USB-Sticks sein.
-USB = "C:/Users/pink_/Documents/GitHub/Python/"
-# USB = "C:/Users/lschi/Documents/GitHub/Python/"
-# USB = "D:/"
-
+#USB = "C:/Users/pink_/Documents/GitHub/Python/"
+#USB = "C:/Users/lschi/Documents/GitHub/Python/"
+#USB = "C:\\Users\\lschi\\Desktop\\Files"
+USB = "D:\\"
 # TODO: Bemessungsgrenze für Durchflusswert und Druck
 DRUCK = 3
 FLOW = 8
@@ -36,7 +36,7 @@ for root, dirs, files in os.walk(USB):
     for FILE in files:
         if FILE.endswith(".csv"):
             # FILE ist tabulator getrennte csv-Datei
-            data = pd.read_csv(FILE, delimiter="\t", error_bad_lines=False)
+            data = pd.read_csv(f"{USB}{FILE}", delimiter="\t", error_bad_lines=False)
 
             testData, SN, metaData = DataService.DataService(data)
             # Berechne boolsche Matritzen für Auswertung
