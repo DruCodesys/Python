@@ -13,7 +13,7 @@ from Service import EvalService, DataService, errorService, TkService
 
 # ------PROGRAMMPARAMETER-----#
 # TODO: Die Variable 'USB' muss das Hauptverzeichnis des USB-Sticks sein.
-USB = "C:/USers/pink_/Documents/GitHub/Python/"
+USB = "C:/Users/pink_/Documents/GitHub/Python/"
 # USB = "C:/Users/lschi/Documents/GitHub/Python/"
 # USB = "D:/"
 
