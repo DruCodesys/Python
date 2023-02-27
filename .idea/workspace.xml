@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="641d81dc-397e-4c5c-a047-fcee579eea27" name="Changes" comment="Erste Versuche mit USB : Manche .csv sind irgendwie nicht lesbar.">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Python.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ergebnis.md" beforeDir="false" afterPath="$PROJECT_DIR$/Ergebnis.md" afterDir="false" />
+    <list default="true" id="641d81dc-397e-4c5c-a047-fcee579eea27" name="Changes" comment="Fehler im Fehlertext vom Durchfluss behoben">
       <change beforePath="$PROJECT_DIR$/PV56ValidationTable.py" beforeDir="false" afterPath="$PROJECT_DIR$/PV56ValidationTable.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,14 +39,27 @@
       <option name="presentableId" value="Default" />
       <updated>1677484200587</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fehler im Fehlertext vom Durchfluss behoben">
+      <created>1677495435279</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1677495435279</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="bugfix: full Path in FILE." />
+    <MESSAGE value="Fehler im Fehlertext vom Durchfluss behoben" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fehler im Fehlertext vom Durchfluss behoben" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/PV56ValidationTable.py</url>
-          <line>35</line>
+          <line>36</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

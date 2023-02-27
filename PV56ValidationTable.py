@@ -32,7 +32,8 @@ ERGEBNIS = "Ergebnis.md"
 
 # -----PROGRAMM-----#
 # For-Schleife wird für jede Datei im Verzeichnis 'USB' ausgeführt
-for root, dirs, files in os.walk(USB):
+for root, dirs, files in os.walk(USB): #os.walk is a Generator. Not possible to store in variables once
+    dirs.clear() # removes subfolders from USB-Device. So Script will only iterate in main folder
     for FILE in files:
         if FILE.endswith(".csv"):
             # FILE ist tabulator getrennte csv-Datei
