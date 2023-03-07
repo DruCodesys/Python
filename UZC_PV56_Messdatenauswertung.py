@@ -28,7 +28,7 @@ RESEATMIN = 1.6
 
 # TODO: Name der Ergebnisdatei im .md-Format
 # TODO: Bitte Beachten: DIe Ergebnisdatei manuell löschen! Dieses Script hängt immer nur an die aktuelle Datei an.
-ERGEBNIS = "Ergebnis.md"
+ERGEBNIS = "ErgebnisUZC.md"
 
 #Function to handle bad line import:
 def handleBadLine(badLine):

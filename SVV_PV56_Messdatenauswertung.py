@@ -22,13 +22,13 @@ DRUCK = 3
 FLOW = 8
 
 # TODO: Grenzwerte für Crack und Reseat
-CRACKMAX = 2.2
-CRACKMIN = 1.8
-RESEATMIN = 1.6
+CRACKMAX = 2
+CRACKMIN = 1.6
+RESEATMIN = 1.2
 
 # TODO: Name der Ergebnisdatei im .md-Format
 # TODO: Bitte Beachten: DIe Ergebnisdatei manuell löschen! Dieses Script hängt immer nur an die aktuelle Datei an.
-ERGEBNIS = "Ergebnis.md"
+ERGEBNIS = "ErgebnisSVV.md"
 
 #Function to handle bad line import:
 def handleBadLine(badLine):
