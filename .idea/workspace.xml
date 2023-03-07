@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="641d81dc-397e-4c5c-a047-fcee579eea27" name="Changes" comment="feature: handleBadLine in main-Script">
+    <list default="true" id="641d81dc-397e-4c5c-a047-fcee579eea27" name="Changes" comment="refactor: TkService. Binding issue to mousewheel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ergebnis.md" beforeDir="false" afterPath="$PROJECT_DIR$/Ergebnis.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Service/TkService.py" beforeDir="false" afterPath="$PROJECT_DIR$/Service/TkService.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +66,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677572419676</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="refactor: TkService. Binding issue to mousewheel">
+      <created>1677582503160</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1677582503160</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -87,6 +92,7 @@
     <MESSAGE value="Fehler im Fehlertext vom Durchfluss behoben" />
     <MESSAGE value="Script now only iterates in main folder" />
     <MESSAGE value="feature: handleBadLine in main-Script" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature: handleBadLine in main-Script" />
+    <MESSAGE value="refactor: TkService. Binding issue to mousewheel" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: TkService. Binding issue to mousewheel" />
   </component>
 </project>
